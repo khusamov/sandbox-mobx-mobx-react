@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import {observer} from 'mobx-react';
 import './App.scss';
 import Project from './model/Project';
 import Document from './model/Document';
-import {observer} from 'mobx-react';
+import ProjectGeometricModel from './model/ProjectGeometricModel';
 
 const project: Project = new Project();
+const projectGeometricModel = new ProjectGeometricModel(project);
 
 @observer
 export default class App extends Component {
@@ -18,9 +20,18 @@ export default class App extends Component {
 					<button onClick={this.onChangeDocument3ButtonClick}>Изменить Документ 3</button>
 				</div>
 				<div>
+					<button onClick={this.onReplaceDocumentsButtonClick}>Заместить массив документов</button>
+				</div>
+				<div>
+					<button onClick={this.onReplaceDocument3ButtonClick}>Заместить Документ 3 на новый</button>
+				</div>
+				<div>
 					Документы:
 					{
-						project.documents.map((document, index) => <div key={index}>{document.title}</div>)
+						projectGeometricModel.documentGeometricModels
+							.map((documentGeometricModel, index) => (
+								<div key={index}>{documentGeometricModel.document.title}</div>
+							))
 					}
 				</div>
 			</div>
@@ -33,5 +44,13 @@ export default class App extends Component {
 
 	private onChangeDocument3ButtonClick = () => {
 		project.documents[3 - 1].title = 'Куку';
+	};
+
+	private onReplaceDocumentsButtonClick = () => {
+		project.documents = [new Document('Док1')];
+	};
+
+	private onReplaceDocument3ButtonClick = () => {
+		project.documents[3 - 1] = new Document('Документ 3 Замещенный');
 	};
 };
