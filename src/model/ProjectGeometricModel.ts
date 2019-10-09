@@ -12,12 +12,17 @@ export default class ProjectGeometricModel {
 	constructor(project: Project) {
 		this.project = project;
 		reaction(() => this.project.documents, this.onProjectDocumentsChange);
-		(this.project.documents as unknown as IObservableArray<Document>).observe(this.onProjectDocumentsSpliceOrUpdate);
+		this.projectDocumentsObserve();
 	}
 
 	private onProjectDocumentsChange = () => {
 		this.documentGeometricModels = this.project.documents.map(document => new DocumentGeometricModel(document));
+		this.projectDocumentsObserve();
 	};
+
+	private projectDocumentsObserve() {
+		(this.project.documents as unknown as IObservableArray<Document>).observe(this.onProjectDocumentsSpliceOrUpdate);
+	}
 
 	private onProjectDocumentsSpliceOrUpdate = (
 		(changeData: IArrayChange<Document> | IArraySplice<Document>) => {
