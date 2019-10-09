@@ -20,10 +20,10 @@ export default class App extends Component {
 					<button onClick={this.onChangeDocument3ButtonClick}>Изменить Документ 3</button>
 				</div>
 				<div>
-					<button onClick={this.onReplaceDocumentsButtonClick}>Заместить массив документов</button>
+					<button onClick={this.onReplaceDocument3ButtonClick}>Заместить Документ 3 на новый</button>
 				</div>
 				<div>
-					<button onClick={this.onReplaceDocument3ButtonClick}>Заместить Документ 3 на новый</button>
+					<button onClick={this.onReplaceDocumentsButtonClick}>Заместить массив документов</button>
 				</div>
 				<div>
 					Документы:
@@ -46,11 +46,11 @@ export default class App extends Component {
 		project.documents[3 - 1].title = 'Куку';
 	};
 
-	private onReplaceDocumentsButtonClick = () => {
-		project.documents = [new Document('Док1')];
-	};
-
 	private onReplaceDocument3ButtonClick = () => {
 		project.documents[3 - 1] = new Document('Документ 3 Замещенный');
+	};
+
+	private onReplaceDocumentsButtonClick = () => {
+		project.documents = [new Document('Док1')];
 	};
 };
