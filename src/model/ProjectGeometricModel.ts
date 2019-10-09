@@ -26,10 +26,13 @@ export default class ProjectGeometricModel {
 
 	private onProjectDocumentsSpliceOrUpdate = (
 		(changeData: IArrayChange<Document> | IArraySplice<Document>) => {
-			this.onProjectDocumentsChange();
 			switch (changeData.type) {
 				case 'splice':
-					// TODO
+					this.documentGeometricModels.splice(
+						changeData.index,
+						changeData.removedCount,
+						...changeData.added.map(document => new DocumentGeometricModel(document))
+					);
 					break;
 				case 'update':
 					this.documentGeometricModels[changeData.index] = new DocumentGeometricModel(changeData.newValue);
