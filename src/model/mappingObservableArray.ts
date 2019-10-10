@@ -1,4 +1,5 @@
-import {IArrayChange, IArraySplice, IObservableArray, IReactionPublic, reaction} from 'mobx';
+import {reaction} from 'mobx';
+import {IArrayChange, IArraySplice, IObservableArray} from 'mobx';
 
 type TConstructor<T> = new (...args: any[]) => T;
 
