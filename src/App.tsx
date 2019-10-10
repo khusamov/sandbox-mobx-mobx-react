@@ -20,6 +20,9 @@ export default class App extends Component {
 					<button onClick={this.onChangeDocument3ButtonClick}>Изменить Документ 3</button>
 				</div>
 				<div>
+					<button onClick={this.onChangeDocument3CoordButtonClick}>Изменить координаты Документ 3</button>
+				</div>
+				<div>
 					<button onClick={this.onReplaceDocument3ButtonClick}>Заместить Документ 3 на новый</button>
 				</div>
 				<div>
@@ -30,7 +33,13 @@ export default class App extends Component {
 					{
 						projectGeometricModel.documentGeometricModels
 							.map((documentGeometricModel, index) => (
-								<div key={index}>{documentGeometricModel.document.title}</div>
+								<div key={index}>
+									{documentGeometricModel.document.title}
+									[
+										{documentGeometricModel.document.coord.x},
+										{documentGeometricModel.document.coord.y}
+									]
+								</div>
 							))
 					}
 				</div>
@@ -44,6 +53,10 @@ export default class App extends Component {
 
 	private onChangeDocument3ButtonClick = () => {
 		project.documents[3 - 1].title = 'Куку';
+	};
+
+	private onChangeDocument3CoordButtonClick = () => {
+		project.documents[3 - 1].coord.x = 10;
 	};
 
 	private onReplaceDocument3ButtonClick = () => {
