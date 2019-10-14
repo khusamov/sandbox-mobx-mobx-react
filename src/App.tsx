@@ -32,14 +32,8 @@ export default class App extends Component {
 					Документы:
 					{
 						projectGeometricModel.documentGeometricModels
-							.map((documentGeometricModel, index) => (
-								<div key={index}>
-									{documentGeometricModel.document.title}
-									[
-										{documentGeometricModel.document.coord.x},
-										{documentGeometricModel.document.coord.y}
-									]
-								</div>
+							.map(({document: {title, coord: {x, y}}}, index) => (
+								<div key={index}>{title} [{x}, {y}]</div>
 							))
 					}
 				</div>
